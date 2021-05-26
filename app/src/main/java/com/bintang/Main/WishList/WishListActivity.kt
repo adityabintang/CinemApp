@@ -3,6 +3,9 @@ package com.bintang.Main.WishList
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.View
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -47,6 +50,16 @@ class WishListActivity : AppCompatActivity() {
 
         movieHelper = MovieHelper.getInstance(this)
         movieHelper.open()
+
+        shimmer_movie_all.startShimmer()
+
+        Handler(Looper.getMainLooper()).postDelayed(Runnable {
+            shimmer_movie_all.stopShimmer()
+            shimmer_movie_all.visibility = View.GONE
+            all_movie.visibility = View.VISIBLE
+            getData()
+            initView()
+        }, 5000)
 
 
     }

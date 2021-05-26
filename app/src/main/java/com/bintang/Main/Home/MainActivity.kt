@@ -16,6 +16,7 @@ import com.bintang.Main.WishList.WishListActivity
 import com.bintang.Utils.Const.CODE_LOGIN
 import com.bintang.Utils.UserPreference
 import com.bintang.cinemapp.Api.DataDummy
+import com.bintang.cinemapp.Database.MovieHelper
 import com.bintang.cinemapp.R
 import com.bintang.cinemapp.ResultsItem
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,12 +25,13 @@ class MainActivity : AppCompatActivity() {
 
     private var listData = ArrayList<ResultsItem>()
     lateinit var userPreference: UserPreference
+    lateinit var movieHelper: MovieHelper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         userPreference = UserPreference(this)
-
+        movieHelper = MovieHelper.getInstance(this)
         shimmer_movie.startShimmer()
 
         Handler(Looper.getMainLooper()).postDelayed(Runnable {
@@ -81,6 +83,16 @@ class MainActivity : AppCompatActivity() {
             tv_user.text = "Login"
             tv_desc.text = "Save your favorite movie"
             iv_logout.visibility = View.INVISIBLE
+        }
+
+        iv_logout.setOnClickListener {
+            userPreference.logOut()
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent)
+            finish()
         }
     }
 

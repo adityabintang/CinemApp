@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.bintang.Main.Home.MainActivity
 import com.bintang.Utils.UserPreference
 import com.bintang.cinemapp.R
 import kotlinx.android.synthetic.main.activity_login.*
@@ -19,14 +20,15 @@ class LoginActivity : AppCompatActivity() {
         userPreference = UserPreference(this)
 
         btn_login.setOnClickListener {
-            if (et_username.text.isEmpty()){
+            if (et_username.text.isEmpty()) {
                 et_username.error = "UserName TIdak Boleh Kosong"
-            }else{
+            } else {
                 userPreference.setNamaUser(et_username.text.toString())
                 userPreference.setStatusUser(true)
 
-                var intent = Intent()
-                setResult(Activity.RESULT_OK, intent)
+                var intent = Intent(this, MainActivity::class.java)
+//                setResult(Activity.RESULT_OK, intent)
+                startActivity(intent)
                 finish()
             }
         }

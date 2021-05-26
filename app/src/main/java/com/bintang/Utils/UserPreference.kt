@@ -28,4 +28,10 @@ class UserPreference(val context: Context) {
     fun getNamaUser():String? {
         return preference.getString(NAMA_USER, "")
     }
+
+    fun logOut(){
+        val editor = preference.edit()
+        editor.clear()
+        editor.commit()
+    }
 }

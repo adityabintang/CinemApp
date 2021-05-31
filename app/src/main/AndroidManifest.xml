@@ -23,7 +23,9 @@
             android:theme="@style/Theme.CinemApp.NoActionBar"></activity>
         <activity android:name="com.bintang.Main.Detail.DetailActivity" />
         <activity android:name="com.bintang.Main.Home.MainActivity"></activity>
-        <activity android:name="com.bintang.Main.WishList.WishListActivity"></activity>
+        <activity
+            android:name="com.bintang.Main.WishList.WishListActivity"
+            android:label="@string/title_movie_favorite"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
